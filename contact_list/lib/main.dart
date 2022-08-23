@@ -20,7 +20,7 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text("Load local JSON file"),
+          title: new Text("Contacts"),
         ),
         body: new Container(
           child: new Center(
@@ -35,18 +35,18 @@ class MyAppState extends State<MyApp> {
                   return new ListView.builder(
                     // Build the ListView
                     itemBuilder: (BuildContext context, int index) {
-                      return new Card(
-                        child: new Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            new Text(
-                                "First name: " + new_data[index]['first_name']),
-                            new Text(
-                                "Last name: " + new_data[index]['last_name']),
-                            new Text("Address: " + new_data[index]['address']),
-                          ],
-                        ),
-                      );
+                      return new ListTile(
+                          leading: CircleAvatar(
+                              child: Text(jsonEncode(
+                                  new_data[index]['first_name'])[1])),
+                          title: new Text(new_data[index]['first_name'] +
+                              " " +
+                              new_data[index]['last_name']),
+                          trailing: new Text(
+                            new_data[index]['address'],
+                            style:
+                                TextStyle(color: Colors.black.withOpacity(0.6)),
+                          ));
                     },
                     itemCount: new_data == null ? 0 : new_data.length,
                   );
